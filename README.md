@@ -1,16 +1,3 @@
----
-tags:
-- visual-question-answering-for-fashion-context
-license: apache-2.0
-widget:
-- text: "Testing.."
-  src: "figure"
-- text: "Testing again.."
-  src: "new figure"
----
-
-
-
 # This is a simple VQA system using Hugging Face, PyTorch and Vision-and-Language Transformer (ViLT)
 -------------
 
