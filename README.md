@@ -5,7 +5,6 @@ In this repository we created a simple VQA system capable of recognize spatial a
 
 The project was based in this paper **FashionVQA: A Domain-Specific Visual Question Answering System** [[1]](#1).
 
-We used the repo <https://github.com/dandelin/ViLT> for the VQA models.
 
 
 
