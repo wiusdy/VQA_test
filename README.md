@@ -3,7 +3,7 @@
 
 In this repository we created a simple VQA system capable of recognize spatial and context information of fashion images (e.g. clothes color and details). 
 
-The project was based in this paper **FashionVQA: A Domain-Specific Visual Question Answering System** [[1]](#1). We also used the VQA pre-trained model from **BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation** [[]](#2) to make the model finetuning the two new models. 
+The project was based in this paper **FashionVQA: A Domain-Specific Visual Question Answering System** [[1]](#1). We also used the VQA pre-trained model from **BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation** [[2]](#2) to make the model finetuning the two new models. 
 
 We used the datasets **Deep Fashion with Masks** available in <https://huggingface.co/datasets/SaffalPoosh/deepFashion-with-masks> and the **Control Net Dataset** available in <https://huggingface.co/datasets/ldhnam/deepfashion_controlnet>.
 
