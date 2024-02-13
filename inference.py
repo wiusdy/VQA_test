@@ -1,13 +1,15 @@
-from transformers import ViltProcessor, ViltForQuestionAnswering, Pix2StructProcessor, Pix2StructForConditionalGeneration, Blip2Processor, Blip2ForConditionalGeneration
+from transformers import ViltProcessor, ViltForQuestionAnswering, BlipProcessor, BlipForQuestionAnswering
 from transformers.utils import logging
+
+import torch
 
 class Inference:
     def __init__(self):
         self.vilt_processor = ViltProcessor.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
         self.vilt_model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
 
-        self.deplot_processor = Pix2StructProcessor.from_pretrained('google/deplot')
-        self.deplot_model = Pix2StructForConditionalGeneration.from_pretrained('google/deplot')
+        self.blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-vqa-base")
+        self.blip_model = BlipForQuestionAnswering.from_pretrained("wiusdy/blip_pretrained_saffal_fashion_finetuning").to("cuda")
         logging.set_verbosity_info()
         self.logger = logging.get_logger("transformers")
 
@@ -17,8 +19,6 @@ class Inference:
             return self.__inference_vilt(image, text)
         elif selected == "Model 2":
             return self.__inference_deplot(image, text)
-        elif selected == "Model 3":
-            return self.__inference_vilt(image, text)
         else:
             self.logger.warning("Please select a model to make the inference..")
 
@@ -30,6 +30,7 @@ class Inference:
         return f"{self.vilt_model.config.id2label[idx]}"
 
     def __inference_deplot(self, image, text):
-        inputs = self.deplot_processor(images=image, text=text, return_tensors="pt")
-        predictions = self.deplot_model.generate(**inputs, max_new_tokens=512)
-        return f"{self.deplot_processor.decode(predictions[0], skip_special_tokens=True)}"
+        encoding = self.blip_processor(image, text, return_tensors="pt").to("cuda:0", torch.float16)
+        out = self.blip_model.generate(**encoding)
+        generated_text = self.blip_processor.decode(out[0], skip_special_tokens=True)
+        return f"{generated_text}"
