@@ -16,11 +16,11 @@ class Inference:
 
     def inference(self, selected, image, text):
         self.logger.info(f"selected model {selected}")
-        if selected == "Model 1":
+        if selected == "ViLT":
             return self.__inference_vilt(image, text)
-        elif selected == "Model 2":
+        elif selected == "Blip Saffal":
             return self.__inference_saffal_blip(image, text)
-        elif selected == "Model 3":
+        elif selected == "Blip CN":
             return self.__inference_control_net_blip(image, text)
         else:
             self.logger.warning("Please select a model to make the inference..")
