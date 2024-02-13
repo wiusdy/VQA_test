@@ -9,8 +9,8 @@ class Inference:
         self.vilt_model = ViltForQuestionAnswering.from_pretrained("dandelin/vilt-b32-finetuned-vqa")
 
         self.blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-vqa-base")
-        self.blip_model_saffal = BlipForQuestionAnswering.from_pretrained("wiusdy/blip_pretrained_saffal_fashion_finetuning").to("cuda")
-        self.blip_model_control_net = BlipForQuestionAnswering.from_pretrained("wiusdy/blip_pretrained_control_net_fashion_finetuning").to("cuda")
+        self.blip_model_saffal = BlipForQuestionAnswering.from_pretrained("wiusdy/blip_pretrained_saffal_fashion_finetuning")
+        self.blip_model_control_net = BlipForQuestionAnswering.from_pretrained("wiusdy/blip_pretrained_control_net_fashion_finetuning")
         logging.set_verbosity_info()
         self.logger = logging.get_logger("transformers")
 
@@ -33,13 +33,13 @@ class Inference:
         return f"{self.vilt_model.config.id2label[idx]}"
 
     def __inference_saffal_blip(self, image, text):
-        encoding = self.blip_processor(image, text, return_tensors="pt").to("cuda:0", torch.float16)
+        encoding = self.blip_processor(image, text, return_tensors="pt")
         out = self.blip_model_saffal.generate(**encoding)
         generated_text = self.blip_processor.decode(out[0], skip_special_tokens=True)
         return f"{generated_text}"
 
     def __inference_control_net_blip(self, image, text):
-        encoding = self.blip_processor(image, text, return_tensors="pt").to("cuda:0", torch.float16)
+        encoding = self.blip_processor(image, text, return_tensors="pt")
         out = self.blip_model_control_net.generate(**encoding)
         generated_text = self.blip_processor.decode(out[0], skip_special_tokens=True)
         return f"{generated_text}"
