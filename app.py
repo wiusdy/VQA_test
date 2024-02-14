@@ -8,8 +8,7 @@ inference = Inference()
 
 with gr.Blocks() as block:
     txt = gr.Textbox(label="Insert a question..", lines=2)
-    outputs = [gr.outputs.Textbox(label="Answer from BLIP saffal model"), gr.outputs.Textbox(label="Answer from BLIP control net"), 
-               gr.outputs.Textbox(label="Answer from ViLT saffal model"), gr.outputs.Textbox(label="Answer from ViLT control net")]
+    outputs = [gr.outputs.Textbox(label="Answer from BLIP saffal model"), gr.outputs.Textbox(label="Answer from BLIP control net")]
 
     btn = gr.Button(value="Submit")
 
