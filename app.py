@@ -10,7 +10,7 @@ with gr.Blocks() as block:
     options = gr.Dropdown(choices=["Blip Saffal", "Blip CN"], label="Models", info="Select the model to use..", )
     # need to improve this one...
 
-    txt = gr.Textbox(label="Insert a question..", lines=2)
+    txt = gr.Textbox(label="Insert a question...", lines=2)
     txt_3 = gr.Textbox(value="", label="Your answer is here..")
     btn = gr.Button(value="Submit")
 
