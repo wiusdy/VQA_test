@@ -12,7 +12,7 @@ with gr.Blocks() as block:
 
     btn = gr.Button(value="Submit")
 
-    dogs = os.path.join(os.path.dirname(__file__), "1.png")
+    dogs = os.path.join(os.path.dirname(__file__), "sample_2.png")
     image = gr.Image(type="pil", value=dogs)
 
     btn.click(inference.inference, inputs=[image, txt], outputs=outputs)
